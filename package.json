@@ -1,13 +1,16 @@
 {
   "dependencies": {
     "aws-sdk": "^2.311.0",
-    "npm": "^6.4.1",
-    "serverless": "^1.31.0",
     "shortid": "^2.2.13"
   },
   "name": "url-redirector",
   "description": "A simple serverless url-redirector using node-js",
   "version": "0.1",
   "main": "redirector.js",
-  "devDependencies": {}
+  "devDependencies": {
+    "npm": "^6.4.1",
+    "serverless": "^1.31.0",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.19.0"
+  }
 }
