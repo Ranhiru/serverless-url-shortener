@@ -18,6 +18,18 @@ module.exports.redirector = async (event, context) => {
   };
 };
 
+module.exports.redirect = async (event, context) => {
+  var key = event.pathParameters.key
+  var url = await getUrlFromKey(key);
+
+  return {
+    statusCode: 301,
+    headers: {
+      Location: url
+    }
+  };
+};
+
 function insertToTable(url) {
   var uniqueKey = generateUniqueKey()
 
@@ -41,6 +53,28 @@ function insertToTable(url) {
       }
 
       resolve(uniqueKey);
+    });
+  });
+}
+
+function getUrlFromKey(key) {
+  var params = {
+    Key: {
+      "id": {
+        S: key
+      }
+    },
+    TableName: process.env.TABLE_NAME
+  };
+
+  return new Promise((resolve, reject) => {
+    return db.getItem(params, function(err, data) {
+       if (err) {
+         console.log(err, err.stack);
+         reject(err)
+       } else {
+         resolve(data["Item"]["url"]);
+       }
     });
   });
 }

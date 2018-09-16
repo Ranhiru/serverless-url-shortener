@@ -29,6 +29,8 @@ provider:
 functions:
   create_redirection:
     handler: redirector.redirector
+  redirect:
+    handler: redirector.redirect
 
 resources:
   Resources:
