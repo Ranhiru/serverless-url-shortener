@@ -73,7 +73,7 @@ function getUrlFromKey(key) {
          console.log(err, err.stack);
          reject(err)
        } else {
-         resolve(data["Item"]["url"]);
+         resolve(data["Item"]["url"].S);
        }
     });
   });
