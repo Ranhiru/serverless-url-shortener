@@ -1,5 +1,11 @@
 service: url-shortner
 
+plugins:
+  - serverless-webpack
+custom:
+  webpack:
+    packager: 'yarn'      # Defaults to npm
+
 provider:
   name: aws
   runtime: nodejs8.10
@@ -29,8 +35,18 @@ provider:
 functions:
   create_redirection:
     handler: redirector.redirector
+    events:
+      - http:
+          path: /submit
+          method: post
+          cors: true
   redirect:
     handler: redirector.redirect
+    events:
+      - http:
+          path: /{key+}
+          method: get
+          cors: true
 
 resources:
   Resources:
